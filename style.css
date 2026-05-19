@@ -11,7 +11,7 @@ html {
 
 body {
   background: #111;
-  animation: fadeIn 0.8s ease-in;
+  animation: fadeIn 0.6s ease-in;
 }
 
 @keyframes fadeIn {
@@ -19,43 +19,60 @@ body {
   to { opacity: 1; }
 }
 
-/* HEADER */
+/* HEADER (STICKY) */
 header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
   display: flex;
+  align-items: center;
   justify-content: space-between;
+
   padding: 15px;
   background: #8b0000;
-  align-items: center;
 }
 
+/* LOGO */
 .logo img {
   height: 55px;
 }
 
-/* NAV */
-nav {
+/* CENTER NAV */
+.nav-center {
   display: flex;
-  gap: 15px;
+  gap: 25px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-nav a {
+/* LINKS */
+.nav-center a {
   color: white;
   text-decoration: none;
+  font-weight: bold;
   position: relative;
-}
-
-nav a::after {
-  content: "";
-  width: 0%;
-  height: 2px;
-  background: yellow;
-  position: absolute;
-  left: 0;
-  bottom: -4px;
   transition: 0.3s;
 }
 
-nav a:hover::after {
+/* UNDERLINE ANIMATION */
+.nav-center a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: #ffcc00;
+  transition: 0.3s;
+}
+
+.nav-center a:hover {
+  color: #ffcc00;
+}
+
+.nav-center a:hover::after {
   width: 100%;
 }
 
@@ -71,8 +88,9 @@ nav a:hover::after {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 
-  animation: slideUp 0.8s ease forwards;
+  animation: slideUp 0.7s ease;
 }
 
 @keyframes slideUp {
@@ -90,13 +108,6 @@ nav a:hover::after {
   color: white;
   padding: 60px 20px;
   text-align: center;
-
-  animation: fadeUp 0.8s ease forwards;
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 /* MENU */
@@ -107,37 +118,32 @@ nav a:hover::after {
   margin-top: 30px;
 }
 
+/* CARD */
 .card {
   background: rgba(0,0,0,0.4);
   padding: 20px;
   border-radius: 12px;
   border: 1px solid rgba(255,255,255,0.2);
-
-  opacity: 0;
-  transform: translateY(30px);
-  animation: popIn 0.6s ease forwards;
+  transition: 0.3s;
 }
 
-.card:nth-child(1) { animation-delay: 0.2s; }
-.card:nth-child(2) { animation-delay: 0.4s; }
-.card:nth-child(3) { animation-delay: 0.6s; }
-
-@keyframes popIn {
-  to { opacity: 1; transform: translateY(0); }
+.card:hover {
+  transform: translateY(-10px);
 }
 
+/* PRICE */
 .card p {
-  color: yellow;
+  color: #ffcc00;
   font-size: 22px;
 }
 
 /* BUTTON */
 .btn {
-  background: yellow;
+  background: #ffcc00;
   padding: 10px 20px;
   border-radius: 6px;
-  display: inline-block;
   margin-top: 20px;
+  display: inline-block;
 }
 
 /* MAP */
@@ -152,7 +158,11 @@ nav a:hover::after {
     grid-template-columns: 1fr;
   }
 
-  nav {
+  .nav-center {
+    position: static;
+    transform: none;
     flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
   }
 }
